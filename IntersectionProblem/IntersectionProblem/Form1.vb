@@ -16,7 +16,7 @@ Public Class Form1
         If Not (IsNumeric(Ast) And IsNumeric(Bst) And IsNumeric(Cst) _
                 And IsNumeric(Dst)) Then
             MessageBox.Show("Please enter valid numbers", "Error!")
-            Return
+            Exit Sub
         End If
 
         ' Convert to double
@@ -25,9 +25,28 @@ Public Class Form1
         C = CDbl(Cst)
         D = CDbl(Dst)
 
-        ' Please write your code here...
+        If A > B Or C > D Then
+            MessageBox.Show("A must be less than B and C must be less than D.", "Error")
+            Exit Sub
+        End If
 
-        txtResult.Text = "Not implemented yet"
+        ' Please write your code here...
+        txtResult.Text = FindIntersection(A, B, C, D)
+
     End Sub
+
+    Function FindIntersection(a As Double, b As Double, c As Double, d As Double) As String
+
+        Dim message As String
+        If (b < c) Or (d < a) Then
+            message = "There is no intersection."
+        Else
+            Dim begpoint As Double = Math.Max(a, c)
+            Dim endpoint As Double = Math.Min(b, d)
+            message = "The intersection is from " & begpoint & " to " & endpoint & "."
+        End If
+        Return message
+
+    End Function
 
 End Class
